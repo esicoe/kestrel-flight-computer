@@ -32,7 +32,6 @@
 #include "LED.h"
 
 // HELPERS
-#define TIMEOUT_1MS             1000UL      // 1000 us
 #define PYRO_OFF                false
 #define PYRO_ON                 true
 #define LED_OFF                 false
@@ -85,95 +84,93 @@
 #define UART1_BAUD              115200UL        // 115.2 kBd
 
 // ADDRESSES
-#define ADDRESS_IMU             0x6AU
-#define ADDRESS_BARO            0x46U
+#define ADDRESS_IMU_I2C                     0x6AU
+#define ADDRESS_IMU_FUNC_CFG_ACCESS         0x01U   // R/W
+#define ADDRESS_IMU_PIN_CTRL                0x02U   // R/W
+#define ADDRESS_IMU_IF_CFG                  0x03U   // R/W
+#define ADDRESS_IMU_FIFO_CTRL1              0x07U   // R/W
+#define ADDRESS_IMU_FIFO_CTRL2              0x08U   // R/W
+#define ADDRESS_IMU_FIFO_CTRL3              0x09U   // R/W
+#define ADDRESS_IMU_FIFO_CTRL4              0x0AU   // R/W
+#define ADDRESS_IMU_COUNTER_BDR_REG1        0x0BU   // R/W
+#define ADDRESS_IMU_INT1_CTRL               0x0DU   // R/W
+#define ADDRESS_IMU_INT2_CTRL               0x0EU   // R/W
+#define ADDRESS_IMU_WHO_AM_I                0x0FU   // R
+#define ADDRESS_IMU_CTRL1                   0x10U   // R/W
+#define ADDRESS_IMU_CTRL2                   0x11U   // R/W
+#define ADDRESS_IMU_CTRL3                   0x12U   // R/W
+#define ADDRESS_IMU_CTRL4                   0x13U   // R/W
+#define ADDRESS_IMU_CTRL5                   0x14U   // R/W
+#define ADDRESS_IMU_CTRL6                   0x15U   // R/W
+#define ADDRESS_IMU_CTRL7                   0x16U   // R/W
+#define ADDRESS_IMU_CTRL8                   0x17U   // R/W
+#define ADDRESS_IMU_CTRL9                   0x18U   // R/W
+#define ADDRESS_IMU_CTRL10                  0x19U   // R/W
+#define ADDRESS_IMU_CTRL_STATUS             0x1AU   // R/W
+#define ADDRESS_IMU_FIFO_STATUS1            0x1BU   // R
+#define ADDRESS_IMU_FIFO_STATUS2            0x1CU   // R
+#define ADDRESS_IMU_ALL_INT_SRC             0x1DU   // R
+#define ADDRESS_IMU_STATUS_REG              0x1EU   // R
+#define ADDRESS_IMU_OUT_TEMP_LSB            0x20U   // R
+#define ADDRESS_IMU_OUT_TEMP_MSB            0x21U   // R
+#define ADDRESS_IMU_OUTX_LSB_G              0x22U   // R
+#define ADDRESS_IMU_OUTX_MSB_G              0x23U   // R
+#define ADDRESS_IMU_OUTY_LSB_G              0x24U   // R
+#define ADDRESS_IMU_OUTY_MSB_G              0x25U   // R
+#define ADDRESS_IMU_OUTZ_LSB_G              0x26U   // R
+#define ADDRESS_IMU_OUTZ_MSB_G              0x27U   // R
+#define ADDRESS_IMU_OUTX_LSB_A              0x28U   // R
+#define ADDRESS_IMU_OUTX_MSB_A              0x29U   // R
+#define ADDRESS_IMU_OUTY_LSB_A              0x2AU   // R
+#define ADDRESS_IMU_OUTY_MSB_A              0x2BU   // R
+#define ADDRESS_IMU_OUTZ_LSB_A              0x2CU   // R
+#define ADDRESS_IMU_OUTZ_MSB_A              0x2DU   // R
+#define ADDRESS_IMU_TIMESTAMP0              0x40U   // R
+#define ADDRESS_IMU_TIMESTAMP1              0x41U   // R
+#define ADDRESS_IMU_TIMESTAMP2              0x42U   // R
+#define ADDRESS_IMU_TIMESTAMP3              0x43U   // R
+#define ADDRESS_IMU_INTERNAL_FREQ           0x4FU   // R
+#define ADDRESS_IMU_FUNCTIONS_ENABLE        0x50U   // R/W
+#define ADDRESS_IMU_TAP_CFG0                0x56U   // R/W
+#define ADDRESS_IMU_MD1_CFG                 0x5EU   // R/W
+#define ADDRESS_IMU_MD2_CFG                 0x5FU   // R/W
+#define ADDRESS_IMU_X_OFS_USR               0x73U   // R/W
+#define ADDRESS_IMU_Y_OFS_USR               0x74U   // R/W
+#define ADDRESS_IMU_Z_OFS_USR               0x75U   // R/W
+#define ADDRESS_IMU_FIFO_DATA_OUT_TAG       0x78U   // R
 
-// REGISTER ADDRESSES
-#define REGISTER_IMU_FUNC_CFG_ACCESS      0x01U   // R/W
-#define REGISTER_IMU_PIN_CTRL             0x02U   // R/W
-#define REGISTER_IMU_IF_CFG               0x03U   // R/W
-#define REGISTER_IMU_FIFO_CTRL1           0x07U   // R/W
-#define REGISTER_IMU_FIFO_CTRL2           0x08U   // R/W
-#define REGISTER_IMU_FIFO_CTRL3           0x09U   // R/W
-#define REGISTER_IMU_FIFO_CTRL4           0x0AU   // R/W
-#define REGISTER_IMU_COUNTER_BDR_REG1     0x0BU   // R/W
-#define REGISTER_IMU_INT1_CTRL            0x0DU   // R/W
-#define REGISTER_IMU_INT2_CTRL            0x0EU   // R/W
-#define REGISTER_IMU_WHO_AM_I             0x0FU   // R
-#define REGISTER_IMU_CTRL1                0x10U   // R/W
-#define REGISTER_IMU_CTRL2                0x11U   // R/W
-#define REGISTER_IMU_CTRL3                0x12U   // R/W
-#define REGISTER_IMU_CTRL4                0x13U   // R/W
-#define REGISTER_IMU_CTRL5                0x14U   // R/W
-#define REGISTER_IMU_CTRL6                0x15U   // R/W
-#define REGISTER_IMU_CTRL7                0x16U   // R/W
-#define REGISTER_IMU_CTRL8                0x17U   // R/W
-#define REGISTER_IMU_CTRL9                0x18U   // R/W
-#define REGISTER_IMU_CTRL10               0x19U   // R/W
-#define REGISTER_IMU_CTRL_STATUS          0x1AU   // R/W
-#define REGISTER_IMU_FIFO_STATUS1         0x1BU   // R
-#define REGISTER_IMU_FIFO_STATUS2         0x1CU   // R
-#define REGISTER_IMU_ALL_INT_SRC          0x1DU   // R
-#define REGISTER_IMU_STATUS_REG           0x1EU   // R
-#define REGISTER_IMU_OUT_TEMP_LSB         0x20U   // R
-#define REGISTER_IMU_OUT_TEMP_MSB         0x21U   // R
-#define REGISTER_IMU_OUTX_LSB_G           0x22U   // R
-#define REGISTER_IMU_OUTX_MSB_G           0x23U   // R
-#define REGISTER_IMU_OUTY_LSB_G           0x24U   // R
-#define REGISTER_IMU_OUTY_MSB_G           0x25U   // R
-#define REGISTER_IMU_OUTZ_LSB_G           0x26U   // R
-#define REGISTER_IMU_OUTZ_MSB_G           0x27U   // R
-#define REGISTER_IMU_OUTX_LSB_A           0x28U   // R
-#define REGISTER_IMU_OUTX_MSB_A           0x29U   // R
-#define REGISTER_IMU_OUTY_LSB_A           0x2AU   // R
-#define REGISTER_IMU_OUTY_MSB_A           0x2BU   // R
-#define REGISTER_IMU_OUTZ_LSB_A           0x2CU   // R
-#define REGISTER_IMU_OUTZ_MSB_A           0x2DU   // R
-#define REGISTER_IMU_TIMESTAMP0           0x40U   // R
-#define REGISTER_IMU_TIMESTAMP1           0x41U   // R
-#define REGISTER_IMU_TIMESTAMP2           0x42U   // R
-#define REGISTER_IMU_TIMESTAMP3           0x43U   // R
-#define REGISTER_IMU_INTERNAL_FREQ        0x4FU   // R
-#define REGISTER_IMU_FUNCTIONS_ENABLE     0x50U   // R/W
-#define REGISTER_IMU_TAP_CFG0             0x56U   // R/W
-#define REGISTER_IMU_MD1_CFG              0x5EU   // R/W
-#define REGISTER_IMU_MD2_CFG              0x5FU   // R/W
-#define REGISTER_IMU_X_OFS_USR            0x73U   // R/W
-#define REGISTER_IMU_Y_OFS_USR            0x74U   // R/W
-#define REGISTER_IMU_Z_OFS_USR            0x75U   // R/W
-#define REGISTER_IMU_FIFO_DATA_OUT_TAG    0x78U   // R
-
-#define REGISTER_BARO_CHIP_ID             0x01U   // R
-#define REGISTER_BARO_REV_ID              0x02U   // R
-#define REGISTER_BARO_CHIP_STATUS         0x11U   // R
-#define REGISTER_BARO_DRIVE_CONFIG        0x13U   // R/W
-#define REGISTER_BARO_INT_CONFIG          0x14U   // R/W
-#define REGISTER_BARO_INT_SOURCE          0x15U   // R/W
-#define REGISTER_BARO_FIFO_CONFIG         0x16U   // R/W
-#define REGISTER_BARO_FIFO_COUNT          0x17U   // R
-#define REGISTER_BARO_FIFO_SEL            0x18U   // R/W
-#define REGISTER_BARO_TEMP_DATA_XLSB      0x1DU   // R
-#define REGISTER_BARO_TEMP_DATA_LSB       0x1EU   // R
-#define REGISTER_BARO_TEMP_DATA_MSB       0x1FU   // R
-#define REGISTER_BARO_PRESS_DATA_XLSB     0x20U   // R
-#define REGISTER_BARO_PRESS_DATA_LSB      0x21U   // R
-#define REGISTER_BARO_PRESS_DATA_MSB      0x22U   // R
-#define REGISTER_BARO_INT_STATUS          0x27U   // R
-#define REGISTER_BARO_STATUS              0x28U   // R
-#define REGISTER_BARO_FIFO_DATA           0x29U   // R
-#define REGISTER_BARO_NVM_ADDR            0x2BU   // R/W
-#define REGISTER_BARO_NVM_DATA_LSB        0x2CU   // R/W
-#define REGISTER_BARO_NVM_DATA_MSB        0x2DU   // R/W
-#define REGISTER_BARO_DSP_CONFIG          0x30U   // R/W
-#define REGISTER_BARO_DSP_IIR             0x31U   // R/W
-#define REGISTER_BARO_OOR_THR_P_LSB       0x32U   // R/W
-#define REGISTER_BARO_OOR_THR_P_MSB       0x33U   // R/W
-#define REGISTER_BARO_OOR_RANGE           0x34U   // R/W
-#define REGISTER_BARO_OOR_CONFIG          0x35U   // R/W
-#define REGISTER_BARO_OSR_CONFIG          0x36U   // R/W
-#define REGISTER_BARO_ODR_CONFIG          0x37U   // R/W
-#define REGISTER_BARO_OSR_EFF             0x38U   // R
-#define REGISTER_BARO_CMD                 0x7EU   // R/W
+#define ADDRESS_BARO_I2C                    0x46U
+#define ADDRESS_BARO_CHIP_ID                0x01U   // R
+#define ADDRESS_BARO_REV_ID                 0x02U   // R
+#define ADDRESS_BARO_CHIP_STATUS            0x11U   // R
+#define ADDRESS_BARO_DRIVE_CONFIG           0x13U   // R/W
+#define ADDRESS_BARO_INT_CONFIG             0x14U   // R/W
+#define ADDRESS_BARO_INT_SOURCE             0x15U   // R/W
+#define ADDRESS_BARO_FIFO_CONFIG            0x16U   // R/W
+#define ADDRESS_BARO_FIFO_COUNT             0x17U   // R
+#define ADDRESS_BARO_FIFO_SEL               0x18U   // R/W
+#define ADDRESS_BARO_TEMP_DATA_XLSB         0x1DU   // R
+#define ADDRESS_BARO_TEMP_DATA_LSB          0x1EU   // R
+#define ADDRESS_BARO_TEMP_DATA_MSB          0x1FU   // R
+#define ADDRESS_BARO_PRESS_DATA_XLSB        0x20U   // R
+#define ADDRESS_BARO_PRESS_DATA_LSB         0x21U   // R
+#define ADDRESS_BARO_PRESS_DATA_MSB         0x22U   // R
+#define ADDRESS_BARO_INT_STATUS             0x27U   // R
+#define ADDRESS_BARO_STATUS                 0x28U   // R
+#define ADDRESS_BARO_FIFO_DATA              0x29U   // R
+#define ADDRESS_BARO_NVM_ADDR               0x2BU   // R/W
+#define ADDRESS_BARO_NVM_DATA_LSB           0x2CU   // R/W
+#define ADDRESS_BARO_NVM_DATA_MSB           0x2DU   // R/W
+#define ADDRESS_BARO_DSP_CONFIG             0x30U   // R/W
+#define ADDRESS_BARO_DSP_IIR                0x31U   // R/W
+#define ADDRESS_BARO_OOR_THR_P_LSB          0x32U   // R/W
+#define ADDRESS_BARO_OOR_THR_P_MSB          0x33U   // R/W
+#define ADDRESS_BARO_OOR_RANGE              0x34U   // R/W
+#define ADDRESS_BARO_OOR_CONFIG             0x35U   // R/W
+#define ADDRESS_BARO_OSR_CONFIG             0x36U   // R/W
+#define ADDRESS_BARO_ODR_CONFIG             0x37U   // R/W
+#define ADDRESS_BARO_OSR_EFF                0x38U   // R
+#define ADDRESS_BARO_CMD                    0x7EU   // R/W
 
 // REGISTER VALUES
 #define VALUE_IMU_WHO_AM_I           0x70U       // Chip 0x70
@@ -449,10 +446,10 @@ struct CONFIGURATION {
 };
 
 static const struct CONFIGURATION BMP585[] = {
-    {REGISTER_BARO_DSP_CONFIG, VALUE_BARO_DSP_RESERVED | VALUE_BARO_DSP_SHDW_IIR_P                  },
-    {REGISTER_BARO_DSP_IIR,    VALUE_BARO_IIR_P_3      | VALUE_BARO_IIR_T_0                         },
-    {REGISTER_BARO_OSR_CONFIG, VALUE_BARO_PRESS_ON     | VALUE_BARO_OSR_P_8 | VALUE_BARO_OSR_T_1    },
-    {REGISTER_BARO_ODR_CONFIG, VALUE_BARO_DEEP_DISABLE | VALUE_BARO_ODR_140 | VALUE_BARO_MODE_NORMAL},
+    {ADDRESS_BARO_DSP_CONFIG, VALUE_BARO_DSP_RESERVED | VALUE_BARO_DSP_SHDW_IIR_P                  },
+    {ADDRESS_BARO_DSP_IIR,    VALUE_BARO_IIR_P_3      | VALUE_BARO_IIR_T_0                         },
+    {ADDRESS_BARO_OSR_CONFIG, VALUE_BARO_PRESS_ON     | VALUE_BARO_OSR_P_8 | VALUE_BARO_OSR_T_1    },
+    {ADDRESS_BARO_ODR_CONFIG, VALUE_BARO_DEEP_DISABLE | VALUE_BARO_ODR_140 | VALUE_BARO_MODE_NORMAL},
 };
 
 static const struct CONFIGURATION LSM6DSV32X[] = {
