@@ -30,4 +30,6 @@ bool UART_CHANGE_BAUD(uart_inst_t *uart, unsigned long baud) {
     return true;
 }
 
-bool UART
+bool UART_TX(uart_inst_t *uart, uint8_t *data, unsigned int length) {
+    
+}
