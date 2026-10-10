@@ -14,9 +14,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdint.h>
 
 // RASPBERRY PI SDK
 #include "pico/stdlib.h"
+#include "pico/multicore.h"
 #include "hardware/spi.h"
 #include "hardware/i2c.h"
 #include "hardware/dma.h"

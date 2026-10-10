@@ -16,7 +16,7 @@
  *          Sets GPIO function.
  *          Disables internal pulls.
  * @param   i2c         i2c0/i2c1.
- * @return  TRUE/FALSE based on set clock.
+ * @return  TRUE/FALSE if the desired clock was applied.
  */
 bool I2C_INIT(i2c_inst_t *i2c);
 

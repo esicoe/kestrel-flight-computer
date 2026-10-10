@@ -1,11 +1,11 @@
 #include "I2C.h"
 
 bool I2C_INIT(i2c_inst_t *i2c) {
-    unsigned long SPEED;
-    
+    unsigned long CLOCK;
+
     if (i2c == i2c0) {
-        SPEED = i2c_init(i2c0, I2C0_CLOCK);
-        if (SPEED > I2C0_CLOCK) return false;
+        CLOCK = i2c_init(i2c0, I2C0_CLOCK);
+        if (CLOCK != I2C0_CLOCK) return false;
 
         gpio_set_function(PIN_I2C0_SCL, GPIO_FUNC_I2C);    
         gpio_set_function(PIN_I2C0_SDA, GPIO_FUNC_I2C);
@@ -16,8 +16,8 @@ bool I2C_INIT(i2c_inst_t *i2c) {
         return true;
     }
     else {
-        SPEED = i2c_init(i2c1, I2C1_CLOCK);
-        if (SPEED > I2C1_CLOCK) return false;
+        CLOCK = i2c_init(i2c1, I2C1_CLOCK);
+        if (CLOCK != I2C1_CLOCK) return false;
 
         gpio_set_function(PIN_I2C1_SCL, GPIO_FUNC_I2C);    
         gpio_set_function(PIN_I2C1_SDA, GPIO_FUNC_I2C);
