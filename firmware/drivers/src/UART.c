@@ -9,6 +9,7 @@ bool UART_INIT(uart_inst_t *uart) {
 
         gpio_set_function(PIN_UART0_RX, UART_FUNCSEL_NUM(uart0,1));
         gpio_set_function(PIN_UART0_TX, UART_FUNCSEL_NUM(uart0,0));
+        uart_set_format(uart0, 8, 1, 0);
     }
     else {
         CLOCK = uart_init(uart1, UART1_BAUD);
@@ -16,6 +17,7 @@ bool UART_INIT(uart_inst_t *uart) {
 
         gpio_set_function(PIN_UART1_RX, UART_FUNCSEL_NUM(uart1,1));
         gpio_set_function(PIN_UART1_TX, UART_FUNCSEL_NUM(uart1,0));
+        uart_set_format(uart1, 8, 1, 0);
     }
 
     return true;
@@ -30,6 +32,12 @@ bool UART_CHANGE_BAUD(uart_inst_t *uart, unsigned long baud) {
     return true;
 }
 
-bool UART_TX(uart_inst_t *uart, uint8_t *data, unsigned int length) {
-    
+bool UART_TX(uart_inst_t *uart, char *data) {
+    bool STATUS = true;
+
+    STATUS = uart_is_writable(uart);
+    if (!STATUS) return false;
+
+    uart_puts(uart, data);
+    return true;
 }

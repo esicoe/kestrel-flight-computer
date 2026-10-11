@@ -14,5 +14,6 @@ void SYSTEM_INIT(void) {
     gpio_set_dir(PIN_PYRO3, GPIO_OUT);
 
     stdio_init_all();
-    LED_INIT();
+    
+    // Driver INITs
 }

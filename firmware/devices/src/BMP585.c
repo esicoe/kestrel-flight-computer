@@ -46,8 +46,11 @@ struct BARO_OUTPUT BARO_READ(void) {
     }
 
     output.pressure_Pa = (((uint32_t)buffer[5] << 16) | ((uint32_t)buffer[4] << 8) | buffer[3]) / 64.0f;
-    output.temperature_cK = (uint16_t)((((int32_t)(((uint32_t)buffer[2] << 24) | ((uint32_t)buffer[1] << 16) | ((uint32_t)buffer[0] << 8)) >> 8) * 100) / 65536 + 27315);
+    output.temperature_cK = (uint16_t)((((int32_t)(((uint32_t)buffer[2] << 24) | ((uint32_t)buffer[1] << 16) | ((uint32_t)buffer[0] << 8)) >> 8) * 100) / 65536);
     output.error = false;
+
+    // Checksum
+    output.checksum = 
 
     return output;
 }
