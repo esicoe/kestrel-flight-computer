@@ -31,13 +31,14 @@ typedef enum {
 void LED_Initialize(void);
 
 /**
- * @brief   Blinking status code.
+ * @brief   Solid error code. Stops the blink timer and halts.
  * @param   status      led_code_t.
+ * @note    Never returns.
  */
 void LED_DisplayError(uint8_t status);
 
 /**
- * @brief   Solid status code, blocking processes.
+ * @brief   Status code. Bits 0-2 set LEDs A-C steady, bits 3-5 make them blink.
  * @param   status      led_code_t.
  */
 void LED_DisplayStatus(uint8_t status);

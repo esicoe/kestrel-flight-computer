@@ -24,7 +24,7 @@ bool I2C1_Write(uint8_t address, uint8_t reg, uint8_t data) {
     return true;
 }
 
-bool I2C1_WriteRead(uint8_t address, uint8_t reg, uint8_t *data, int length) {
+bool I2C1_Read(uint8_t address, uint8_t reg, uint8_t *data, int length) {
     int status;
 
     status = i2c_write_timeout_us(i2c1, address, &reg, 1, true, 1000);

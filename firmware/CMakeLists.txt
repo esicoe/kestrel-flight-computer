@@ -25,10 +25,10 @@ endif()
 # ====================================================================================
 set(PICO_BOARD pico2 CACHE STRING "Board type")
 
-# Kestrel board: RP2354B (48 GPIOs, 2 MB in-package flash), defined in config/kestrel.h.
+# Kestrel board: RP2354B (48 GPIOs, 2 MB in-package flash), defined in config/board.h.
 # Plain (non-cache) variables override the extension's PICO_BOARD line above.
 set(PICO_BOARD_HEADER_DIRS ${CMAKE_CURRENT_LIST_DIR}/config)
-set(PICO_BOARD kestrel)
+set(PICO_BOARD board)
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
@@ -42,7 +42,7 @@ pico_sdk_init()
 # Sources: every .c file in the code folders is built automatically.
 # New files are picked up on the next build (CONFIGURE_DEPENDS), no edits here needed.
 # ---------------------------------------------------------------------------
-set(KESTREL_CODE_DIRS config system drivers devices fusion console flight)
+set(KESTREL_CODE_DIRS config drivers devices fusion console flight)
 
 set(KESTREL_SOURCES ${CMAKE_CURRENT_LIST_DIR}/main.c)
 set(KESTREL_INCLUDE_DIRS ${CMAKE_CURRENT_LIST_DIR})
@@ -84,19 +84,14 @@ pico_enable_stdio_uart(firmware 0)
 pico_enable_stdio_usb(firmware 1)
 
 target_link_libraries(firmware
-        pico_stdlib
-        pico_multicore
-        hardware_i2c
-        hardware_spi
-        hardware_uart
-        hardware_pwm
-        hardware_adc
-        hardware_dma
-        hardware_pio
-        hardware_interp
-        hardware_timer
-        hardware_watchdog
-        hardware_clocks
+        pico_stdlib          # gpio, uart, timer, clocks, sync, time, queue, stdio
+        pico_multicore       # core 1, FIFO, doorbells, lockout
+        hardware_i2c         # IMU (I2C0), barometer (I2C1)
+        hardware_spi         # W25Q128 (SPI0), microSD (SPI1)
+        hardware_uart        # GNSS (UART0), LoRa (UART1)
+        hardware_dma         # flash/SD writes without the CPU
+        hardware_pwm         # servos
+        hardware_watchdog    # one watchdog for both cores
         )
 
 pico_add_extra_outputs(firmware)

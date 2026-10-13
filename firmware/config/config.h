@@ -14,7 +14,6 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include <stdint.h>
 #include <stddef.h>
 #include <stdatomic.h>
 
@@ -30,15 +29,6 @@
 #include "hardware/pwm.h"           
 #include "hardware/watchdog.h"      
 #include "hardware/irq.h"
-
-// DRIVERS
-#include "i2c0.h"
-#include "i2c1.h"
-
-#include "led.h"
-
-// DEVICES
-#include "bmp585.h"
 
 // CLOCKS           
 #define I2C0_CLOCK  400000UL    // 400 KHz

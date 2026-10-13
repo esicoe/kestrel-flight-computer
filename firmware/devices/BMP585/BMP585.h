@@ -4,6 +4,9 @@
 #include "config.h"
 #include "pins.h"
 
+#include "i2c1.h"
+#include "led.h"
+
 #define ADDRESS_BARO_I2C                            0x46U       //
 #define ADDRESS_BARO_CHIP_ID                        0x01U       // R
 #define ADDRESS_BARO_REV_ID                         0x02U       // R
@@ -147,7 +150,7 @@ void BMP585_Initialize(void);
  * @brief   Reads one temperature and pressure sample.
  * @return  The sample, time-stamped. error is set if the I2C read failed.
  */
-bmp585_sample_t BMP585_Read(void);
+bmp585_output_t BMP585_Read(void);
 
 
 #endif // BMP585_H
