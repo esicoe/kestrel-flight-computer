@@ -7,7 +7,7 @@
 #include "i2c1.h"
 #include "led.h"
 
-#define ADDRESS_BARO_I2C                0x46U   //
+#define ADDRESS_BARO_I2C                0x46U   
 #define ADDRESS_BARO_CHIP_ID            0x01U   // R
 #define ADDRESS_BARO_REV_ID             0x02U   // R
 #define ADDRESS_BARO_CHIP_STATUS        0x11U   // R
