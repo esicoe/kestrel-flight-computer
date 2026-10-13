@@ -31,7 +31,7 @@
 #include "hardware/irq.h"
 
 // CLOCKS           
-#define I2C0_CLOCK  400000UL    // 400 KHz
+#define I2C0_CLOCK  1000000UL   // 1 MHz
 #define I2C1_CLOCK  400000UL    // 400 KHz
 #define SPI0_CLOCK  20000000UL  // 20 MHz
 #define SPI1_CLOCK  400000UL    // 400 KHz
