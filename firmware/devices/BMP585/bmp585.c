@@ -53,15 +53,15 @@ bmp585_output_t BMP585_Read(void) {
     }
 
     output.pressure_Pa = (((uint32_t)buffer[5] << 16) | ((uint32_t)buffer[4] << 8) | buffer[3]) / 64.0f;
-    output.temperature_cK = (uint16_t)((((int32_t)(((uint32_t)buffer[2] << 24) | ((uint32_t)buffer[1] << 16) | ((uint32_t)buffer[0] << 8)) >> 8) * 100) / 65536);
+    output.temperature_K = (uint16_t)(((((int32_t)(((uint32_t)buffer[2] << 24) | ((uint32_t)buffer[1] << 16) | ((uint32_t)buffer[0] << 8))) >> 8) + 17901158 + 32768) / 65536);    
     output.error = false;
 
     uint8_t *output_bytes = (uint8_t *)&output;
 
-    for(int i = 0; i < 15; i++) {
+    for(uint8_t i = 0; i < 15; i++) {
         crc = crc ^ output_bytes[i];
 
-        for (uint8_t i = 0; i < 8; i++) {
+        for (uint8_t j = 0; j < 8; j++) {
             if (crc >> 7) {
                 crc = (crc << 1) ^ 0x31;
             }
@@ -71,5 +71,7 @@ bmp585_output_t BMP585_Read(void) {
         }
     }
 
+    output.checksum = crc;
+    
     return output;
 }
