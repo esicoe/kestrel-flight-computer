@@ -1,3 +1,9 @@
+/**
+ * @file    bmp585.h
+ * @brief   Addresses.
+ *          Register values.
+ */
+
 #ifndef BMP585_H
 #define BMP585_H
 
@@ -132,7 +138,7 @@ typedef struct {
     float       pressure_Pa;
     uint16_t    temperature_K;
     bool        error;
-    uint8_t     checksum;
+    uint8_t     crc8;
 } bmp585_output_t;
 
 typedef struct {
@@ -141,14 +147,18 @@ typedef struct {
 } register_setting_t;
 
 /**
- * @brief   Checks the chip ID and status, then writes the configuration table.
- * @note    Halts with the BAROMETER_FAIL LED code if any step fails.
+ * @brief   Checks chip ID and status, writes configuration table to the chip's registers.
+ * @note    Initialization failiure displays BAROMETER_FAIL on LEDs and blocks CPU.
  */
 void BMP585_Initialize(void);
 
 /**
- * @brief   Reads one temperature and pressure sample.
- * @return  The sample, time-stamped. error is set if the I2C read failed.
+ * @brief   Reads pressure and temperature data.
+ * @return  Time (us),
+ *          Pressure (Pa),
+ *          Temperature (K),
+ *          Failiure flag,
+ *          CRC-8.
  */
 bmp585_output_t BMP585_Read(void);
 

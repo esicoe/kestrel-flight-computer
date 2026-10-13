@@ -26,19 +26,19 @@ typedef enum {
 } led_code_t;
 
 /**
- * @brief   Initializes the three status LEDs (off) and starts the 250 ms blink timer.
+ * @brief   Initializes LEDs GPIO and 250ms timer.
  */
 void LED_Initialize(void);
 
 /**
- * @brief   Solid error code. Stops the blink timer and halts.
+ * @brief   Error code, solid LEDs and blocks CPU.
  * @param   status      led_code_t.
  * @note    Never returns.
  */
 void LED_DisplayError(uint8_t status);
 
 /**
- * @brief   Status code. Bits 0-2 set LEDs A-C steady, bits 3-5 make them blink.
+ * @brief   Status code, blinking LEDs.
  * @param   status      led_code_t.
  */
 void LED_DisplayStatus(uint8_t status);

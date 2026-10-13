@@ -1,7 +1,7 @@
 /**
  * @file    config.h
- * @brief   Libaries.
- *          Bus speeds.
+ * @brief   Libaries,
+ *          Bus speeds,
  *          Helpers.
  * @author  esicoe
  */

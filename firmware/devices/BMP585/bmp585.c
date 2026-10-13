@@ -71,7 +71,7 @@ bmp585_output_t BMP585_Read(void) {
         }
     }
 
-    output.checksum = crc;
+    output.crc8 = crc;
     
     return output;
 }

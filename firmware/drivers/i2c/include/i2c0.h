@@ -12,8 +12,8 @@
 
 /**
  * @brief   Initializes I2C0.
- *          Sets bus clock.
- *          Sets GPIO function.
+ *          Sets bus clock,
+ *          Sets GPIO function,
  *          Disables internal pulls.
  * @return  TRUE/FALSE if the desired clock was applied.
  */
@@ -24,7 +24,7 @@ bool I2C0_Initialize(void);
  * @param   address     Device I2C address.
  * @param   reg         Register address.
  * @param   data        Write content.
- * @return  TRUE on success.
+ * @return  TRUE on success,
  *          FALSE on failure.
  */
 bool I2C0_Write(uint8_t address, uint8_t reg, uint8_t data);
@@ -32,10 +32,10 @@ bool I2C0_Write(uint8_t address, uint8_t reg, uint8_t data);
 /**
  * @brief   Reads multiple registers in sequence.
  * @param   address     Device I2C address.
- * @param   reg         Register address,
+ * @param   reg         Register address.
  * @param   data        Address of outputted data.
- * @param   length      Number of registers to read,
- * @return  TRUE on success.
+ * @param   length      Number of registers to read.
+ * @return  TRUE on success,
  *          FALSE on failure.
  */
 bool I2C0_Read(uint8_t address, uint8_t reg, uint8_t *data, int length);
