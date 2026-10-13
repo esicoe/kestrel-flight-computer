@@ -1,8 +1,7 @@
 #include "config.h"
 #include "pins.h"
 
-int main(void) {
-    // Pyro gates: output latch set low before the pins become outputs, so they never glitch high
+void main(void) {
     gpio_init(PIN_PYRO1);
     gpio_init(PIN_PYRO2);
     gpio_init(PIN_PYRO3);
@@ -16,5 +15,6 @@ int main(void) {
     gpio_set_dir(PIN_PYRO3, GPIO_OUT);
 
     stdio_init_all();
-    return 0;
+    
+    while(true) {}
 }

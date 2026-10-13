@@ -39,6 +39,7 @@
 #define ADDRESS_BARO_ODR_CONFIG         0x37U   // R/W
 #define ADDRESS_BARO_OSR_EFF            0x38U   // R
 #define ADDRESS_BARO_CMD                0x7EU   // R/W
+
 #define VALUE_BARO_CHIP_ID              0x51U   // Chip 0x51
 #define VALUE_BARO_STATUS_RDY           0x02U   // Chip ready
 #define VALUE_BARO_CMD_SOFT_RESET       0xB6U   // Command reset
