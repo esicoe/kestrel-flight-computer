@@ -1,6 +1,6 @@
 #include "BMP585.h"
 
-static const register_setting_t bmp585Config[] = {
+register_setting_t bmp585Config[] = {
     {ADDRESS_BARO_DSP_CONFIG, VALUE_BARO_DSP_RESERVED | VALUE_BARO_DSP_SHDW_IIR_P                  },
     {ADDRESS_BARO_DSP_IIR,    VALUE_BARO_IIR_P_3      | VALUE_BARO_IIR_T_0                         },
     {ADDRESS_BARO_OSR_CONFIG, VALUE_BARO_PRESS_ON     | VALUE_BARO_OSR_P_8 | VALUE_BARO_OSR_T_1    },
@@ -21,14 +21,14 @@ void BMP585_Initialize(void) {
     input = VALUE_BARO_DEEP_DISABLE | (bmp585Config[3].value & 0x7C) | VALUE_BARO_MODE_STANDBY;
     status &= I2C1_Write(ADDRESS_BARO_I2C, ADDRESS_BARO_ODR_CONFIG, input);
 
-    sleep_ms(3);
+    sleep_ms(5);
 
     for (uint8_t i = 0; i < (sizeof(bmp585Config) / sizeof(bmp585Config[0])); i++) {
         input = bmp585Config[i].value;
         status &= I2C1_Write(ADDRESS_BARO_I2C, bmp585Config[i].reg, input);
     }
 
-    sleep_ms(3);
+    sleep_ms(5);
 
     status &= I2C1_Read(ADDRESS_BARO_I2C, ADDRESS_BARO_OSR_EFF, &output, 1);
     status &= (output == (VALUE_BARO_ODR_IS_VALID | (bmp585Config[2].value & 0x3F)));
