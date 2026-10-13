@@ -9,8 +9,8 @@ static const register_setting_t bmp585Config[] = {
 
 void BMP585_Initialize(void) {
     bool status = true;
-    uint8_t output = 0;
-    uint8_t input = 0;
+    uint8_t output;
+    uint8_t input;
 
     status &= I2C1_Read(ADDRESS_BARO_I2C, ADDRESS_BARO_CHIP_ID, &output, 1);
     status &= (output == VALUE_BARO_CHIP_ID);
