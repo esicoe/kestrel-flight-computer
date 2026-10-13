@@ -1,6 +1,6 @@
-#include "config.h"
+#include "system.h"
 
 int main(void) {
-    SYSTEM_INIT();
+    stdio_init_all();
     return 0;
 }

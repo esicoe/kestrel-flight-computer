@@ -1,0 +1,45 @@
+/**
+ * @file    w25q128_defs.h
+ * @brief   W25Q128JV SPI flash: instruction opcodes.
+ * @author  esicoe
+ */
+
+#ifndef W25Q128_DEFS_H
+#define W25Q128_DEFS_H
+
+#define OPCODE_FLASH_WRITE_ENABLE                   0x06U
+#define OPCODE_FLASH_VOLATILE_SR_WRITE_ENABLE       0x50U
+#define OPCODE_FLASH_WRITE_DISABLE                  0x04U
+#define OPCODE_FLASH_RELEASE_POWER_DOWN_ID          0xABU
+#define OPCODE_FLASH_MANUFACTURER_DEVICE_ID         0x90U
+#define OPCODE_FLASH_JEDEC_ID                       0x9FU
+#define OPCODE_FLASH_READ_UNIQUE_ID                 0x4BU
+#define OPCODE_FLASH_READ_DATA                      0x03U
+#define OPCODE_FLASH_FAST_READ                      0x0BU
+#define OPCODE_FLASH_PAGE_PROGRAM                   0x02U
+#define OPCODE_FLASH_SECTOR_ERASE_4KB               0x20U
+#define OPCODE_FLASH_BLOCK_ERASE_32KB               0x52U
+#define OPCODE_FLASH_BLOCK_ERASE_64KB               0xD8U
+#define OPCODE_FLASH_CHIP_ERASE                     0xC7U
+#define OPCODE_FLASH_READ_STATUS_REGISTER_1         0x05U
+#define OPCODE_FLASH_WRITE_STATUS_REGISTER_1        0x01U
+#define OPCODE_FLASH_READ_STATUS_REGISTER_2         0x35U
+#define OPCODE_FLASH_WRITE_STATUS_REGISTER_2        0x31U
+#define OPCODE_FLASH_READ_STATUS_REGISTER_3         0x15U
+#define OPCODE_FLASH_WRITE_STATUS_REGISTER_3        0x11U
+#define OPCODE_FLASH_READ_SFDP_REGISTER             0x5AU
+#define OPCODE_FLASH_ERASE_SECURITY_REGISTER        0x44U
+#define OPCODE_FLASH_PROGRAM_SECURITY_REGISTER      0x42U
+#define OPCODE_FLASH_READ_SECURITY_REGISTER         0x48U
+#define OPCODE_FLASH_GLOBAL_BLOCK_LOCK              0x7EU
+#define OPCODE_FLASH_GLOBAL_BLOCK_UNLOCK            0x98U
+#define OPCODE_FLASH_READ_BLOCK_LOCK                0x3DU
+#define OPCODE_FLASH_INDIVIDUAL_BLOCK_LOCK          0x36U
+#define OPCODE_FLASH_INDIVIDUAL_BLOCK_UNLOCK        0x39U
+#define OPCODE_FLASH_ERASE_PROGRAM_SUSPEND          0x75U
+#define OPCODE_FLASH_ERASE_PROGRAM_RESUME           0x7AU
+#define OPCODE_FLASH_POWER_DOWN                     0xB9U
+#define OPCODE_FLASH_ENABLE_RESET                   0x66U
+#define OPCODE_FLASH_RESET_DEVICE                   0x99U
+
+#endif // W25Q128_DEFS_H

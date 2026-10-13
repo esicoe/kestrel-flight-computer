@@ -25,9 +25,9 @@ endif()
 # ====================================================================================
 set(PICO_BOARD pico2 CACHE STRING "Board type")
 
-# Kestrel board: RP2354B (48 GPIOs, 2 MB in-package flash), defined in boards/kestrel.h.
+# Kestrel board: RP2354B (48 GPIOs, 2 MB in-package flash), defined in config/kestrel.h.
 # Plain (non-cache) variables override the extension's PICO_BOARD line above.
-set(PICO_BOARD_HEADER_DIRS ${CMAKE_CURRENT_LIST_DIR}/boards)
+set(PICO_BOARD_HEADER_DIRS ${CMAKE_CURRENT_LIST_DIR}/config)
 set(PICO_BOARD kestrel)
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
@@ -42,7 +42,7 @@ pico_sdk_init()
 # Sources: every .c file in the code folders is built automatically.
 # New files are picked up on the next build (CONFIGURE_DEPENDS), no edits here needed.
 # ---------------------------------------------------------------------------
-set(KESTREL_CODE_DIRS config drivers devices fusion console flight)
+set(KESTREL_CODE_DIRS config system drivers devices fusion console flight)
 
 set(KESTREL_SOURCES ${CMAKE_CURRENT_LIST_DIR}/main.c)
 set(KESTREL_INCLUDE_DIRS ${CMAKE_CURRENT_LIST_DIR})
@@ -51,7 +51,7 @@ foreach(dir ${KESTREL_CODE_DIRS})
     list(APPEND KESTREL_SOURCES ${dir_sources})
 
     # Every folder that holds a header becomes an include path,
-    # so #include "I2C.h" works wherever the header lives.
+    # so #include "i2c1.h" works wherever the header lives.
     file(GLOB_RECURSE dir_headers CONFIGURE_DEPENDS ${CMAKE_CURRENT_LIST_DIR}/${dir}/*.h)
     foreach(header ${dir_headers})
         get_filename_component(header_dir ${header} DIRECTORY)

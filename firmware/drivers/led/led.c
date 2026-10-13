@@ -1,20 +1,23 @@
-#include "LED.h"
+#include "led.h"
 
-static bool BLINK(repeating_timer_t *rt) {
-    static bool ON_OFF;
+static repeating_timer_t timer250ms;
+static volatile uint8_t currentStatus = 0;
 
-    uint8_t status = CURRENT_STATUS;
+static bool blinkCallback(repeating_timer_t *rt) {
+    static bool onOff;
 
-    if (status & 0b00001000) gpio_put(PIN_LED_STATUSA, ON_OFF ? LED_ON : LED_OFF);
-    if (status & 0b00010000) gpio_put(PIN_LED_STATUSB, ON_OFF ? LED_ON : LED_OFF);
-    if (status & 0b00100000) gpio_put(PIN_LED_STATUSC, ON_OFF ? LED_ON : LED_OFF);
+    uint8_t status = currentStatus;
 
-    ON_OFF = !ON_OFF;
+    if (status & 0b00001000) gpio_put(PIN_LED_STATUSA, onOff ? LED_ON : LED_OFF);
+    if (status & 0b00010000) gpio_put(PIN_LED_STATUSB, onOff ? LED_ON : LED_OFF);
+    if (status & 0b00100000) gpio_put(PIN_LED_STATUSC, onOff ? LED_ON : LED_OFF);
+
+    onOff = !onOff;
 
     return true;
 }
 
-void LED_INIT(void) {
+void LED_Initialize(void) {
     gpio_init(PIN_LED_STATUSA);
     gpio_init(PIN_LED_STATUSB);
     gpio_init(PIN_LED_STATUSC);
@@ -27,13 +30,13 @@ void LED_INIT(void) {
     gpio_put(PIN_LED_STATUSB, LED_OFF);
     gpio_put(PIN_LED_STATUSC, LED_OFF);
 
-    add_repeating_timer_ms(250, BLINK, NULL, &TIMER_250MS);
+    add_repeating_timer_ms(250, blinkCallback, NULL, &timer250ms);
 }
 
-void DISPLAY_ERROR(uint8_t status) {
-    CURRENT_STATUS = status;
+void LED_DisplayError(uint8_t status) {
+    currentStatus = status;
 
-    cancel_repeating_timer(&TIMER_250MS);
+    cancel_repeating_timer(&timer250ms);
 
     gpio_put(PIN_LED_STATUSA, (status & 0b00000001) ? LED_ON : LED_OFF);
     gpio_put(PIN_LED_STATUSB, (status & 0b00000010) ? LED_ON : LED_OFF);
@@ -42,8 +45,8 @@ void DISPLAY_ERROR(uint8_t status) {
     while (true) {}     
 }
 
-void DISPLAY_STATUS(uint8_t status) {
-    CURRENT_STATUS = status;
+void LED_DisplayStatus(uint8_t status) {
+    currentStatus = status;
 
     if (!(status & 0b00001000)) gpio_put(PIN_LED_STATUSA, (status & 0b00000001) ? LED_ON : LED_OFF);
     if (!(status & 0b00010000)) gpio_put(PIN_LED_STATUSB, (status & 0b00000010) ? LED_ON : LED_OFF);
