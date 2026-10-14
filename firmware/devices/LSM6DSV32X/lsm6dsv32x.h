@@ -1,5 +1,5 @@
-#ifndef LSM5DSV32X_H
-#define LSM5DSV32X_H
+#ifndef LSM6DSV32X_H
+#define LSM6DSV32X_H
 
 #include "config.h"
 #include "pins.h"
@@ -151,9 +151,4 @@
 #define VALUE_IMU_ST_G_POSITIVE         0x04U   // Self-test positive
 #define VALUE_IMU_ST_G_NEGATIVE         0x08U   // Self-test negative
 
-typedef struct {
-    uint8_t reg;
-    uint8_t value;
-} register_setting_t;
-
-#endif // LSM5DSV32X_H
+#endif // LSM6DSV32X_H

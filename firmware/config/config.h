@@ -39,9 +39,14 @@
 #define UART1_BAUD  115200UL    // 115.2 Bd
 
 // HELPERS
-#define PYRO_OFF                                    false
-#define PYRO_ON                                     true
-#define LED_OFF                                     false
-#define LED_ON                                      true
+#define PYRO_OFF    false
+#define PYRO_ON     true
+#define LED_OFF     false
+#define LED_ON      true
+
+typedef struct {
+    uint8_t reg;
+    uint8_t value;
+} register_setting_t;
 
 #endif // CONFIG_H

@@ -141,11 +141,6 @@ typedef struct {
     uint8_t     crc8;
 } bmp585_output_t;
 
-typedef struct {
-    uint8_t reg;
-    uint8_t value;
-} register_setting_t;
-
 /**
  * @brief   Checks chip ID and status, writes configuration table to the chip's registers.
  * @note    Initialization failiure displays BAROMETER_FAIL on LEDs and blocks CPU.
