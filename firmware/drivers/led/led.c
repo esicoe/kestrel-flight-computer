@@ -4,6 +4,7 @@ static repeating_timer_t timer250ms;
 static volatile uint8_t currentStatus = 0;
 
 static bool blinkCallback(repeating_timer_t *rt) {
+    (void)rt;
     static bool onOff;
 
     uint8_t status = currentStatus;
