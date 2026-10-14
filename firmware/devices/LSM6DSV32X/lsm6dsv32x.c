@@ -42,3 +42,4 @@ void LSM6DSV32X_Initialize(void) {
         LED_DisplayError(IMU_FAIL);
     }
 }
+

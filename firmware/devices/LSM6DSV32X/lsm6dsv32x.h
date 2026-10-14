@@ -1,3 +1,9 @@
+/**
+ * @file    lsm6dsv32x.h
+ * @brief   LSM6DSV32X header.
+ * @author  esicoe.
+ */
+
 #ifndef LSM6DSV32X_H
 #define LSM6DSV32X_H
 

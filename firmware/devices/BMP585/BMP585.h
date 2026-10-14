@@ -1,7 +1,7 @@
 /**
  * @file    bmp585.h
- * @brief   Addresses.
- *          Register values.
+ * @brief   BMP585 header.
+ * @author  esicoe.
  */
 
 #ifndef BMP585_H
