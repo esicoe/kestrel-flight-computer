@@ -10,6 +10,4 @@
 #include "config.h"
 #include "pins.h"
 
-
-
 #endif // UART0_H
