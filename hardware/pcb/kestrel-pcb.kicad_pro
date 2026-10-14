@@ -507,7 +507,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "mini-one-pcb.kicad_pro",
+    "filename": "kestrel-pcb.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -794,8 +794,8 @@
     "subpart_id_separator": 0,
     "top_level_sheets": [
       {
-        "filename": "mini-one-pcb.kicad_sch",
-        "name": "mini-one-pcb",
+        "filename": "kestrel-pcb.kicad_sch",
+        "name": "kestrel-pcb",
         "uuid": "ceb43049-5cbf-4c56-aa0a-c2184d7e2ca1"
       }
     ],

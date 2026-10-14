@@ -156,5 +156,27 @@
 #define VALUE_IMU_ST_XL_NEGATIVE        0x02U   // Self-test negative
 #define VALUE_IMU_ST_G_POSITIVE         0x04U   // Self-test positive
 #define VALUE_IMU_ST_G_NEGATIVE         0x08U   // Self-test negative
+#define VALUE_IMU_ACCEL_SCALE_4         (0.122f / 1000.0f * 9.80665f)   // 4 g    
+#define VALUE_IMU_ACCEL_SCALE_8         (0.244f / 1000.0f * 9.80665f)   // 8 g    
+#define VALUE_IMU_ACCEL_SCALE_16        (0.488f / 1000.0f * 9.80665f)   // 16 g   
+#define VALUE_IMU_ACCEL_SCALE_32        (0.976f / 1000.0f * 9.80665f)   // 32 g
+#define VALUE_IMU_GYRO_SCALE_125        (4.375f / 1000.0f)              // 125 dps
+#define VALUE_IMU_GYRO_SCALE_250        (8.75f  / 1000.0f)              // 250 dps
+#define VALUE_IMU_GYRO_SCALE_500        (17.5f  / 1000.0f)              // 500 dps
+#define VALUE_IMU_GYRO_SCALE_1000       (35.0f  / 1000.0f)              // 1000 dps
+#define VALUE_IMU_GYRO_SCALE_2000       (70.0f  / 1000.0f)              // 2000 dps
+#define VALUE_IMU_GYRO_SCALE_4000       (140.0f / 1000.0f)              // 4000 dps
+
+typedef struct {
+    uint64_t    time_us;
+    float       gyro_x_dps;
+    float       gyro_y_dps;
+    float       gyro_z_dps;
+    float       accel_x_ms2;
+    float       accel_y_ms2;
+    float       accel_z_ms2;
+    bool        error;
+    uint8_t     crc8;
+} lsm6dsv32x_output_t;
 
 #endif // LSM6DSV32X_H

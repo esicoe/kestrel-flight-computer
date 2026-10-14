@@ -1,7 +1,7 @@
 #include "config.h"
 #include "pins.h"
 
-void main(void) {
+int main(void) {
     gpio_init(PIN_PYRO1);
     gpio_init(PIN_PYRO2);
     gpio_init(PIN_PYRO3);
