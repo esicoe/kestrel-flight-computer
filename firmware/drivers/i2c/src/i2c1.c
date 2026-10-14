@@ -1,10 +1,8 @@
 #include "i2c1.h"
 
 bool I2C1_Initialize(void) {
-    unsigned long rate;
-
-    rate = i2c_init(i2c1, I2C1_CLOCK);
-    if (rate != I2C1_CLOCK) return false;
+    unsigned int clock = i2c_init(i2c1, I2C1_CLOCK);
+    if (clock != I2C1_CLOCK) return false;
 
     gpio_set_function(PIN_I2C1_SCL, GPIO_FUNC_I2C);
     gpio_set_function(PIN_I2C1_SDA, GPIO_FUNC_I2C);

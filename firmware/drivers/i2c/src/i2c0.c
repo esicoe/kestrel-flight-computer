@@ -1,9 +1,7 @@
 #include "i2c0.h"
 
 bool I2C0_Initialize(void) {
-    unsigned long clock;
-
-    clock = i2c_init(i2c0, I2C0_CLOCK);
+    unsigned int clock = i2c_init(i2c0, I2C0_CLOCK);
     if (clock != I2C0_CLOCK) {
         return false;
     }
