@@ -8,7 +8,7 @@ bool UART0_Initialize(void) {
     gpio_set_function(PIN_UART0_RX, UART_FUNCSEL_NUM(uart0, PIN_UART0_RX));
 
     unsigned int baud = uart_init(uart0, UART0_BAUD);
-    if (((UART0_BAUD*0.98f) <= baud) && (baud <= (UART0_BAUD*1.02f))) {
+    if (!(((UART0_BAUD*0.98f) <= baud) && (baud <= (UART0_BAUD*1.02f)))) {
         return false;
     }
 
@@ -17,14 +17,23 @@ bool UART0_Initialize(void) {
 
 bool UART0_ChangeBaud(unsigned int baud) {
     bool status = uart_is_enabled(uart0);
+    if (!status) {
+        return false;
+    }
 
-    if (((uart_set_baudrate(uart0, baud)*0.98f) <= baud) && (baud <= uart_set_baud(uart0, baud)*1.02f)) {
-        return status;
+    unsigned int actual_baud = uart_set_baudrate(uart0, baud);
+
+    if (((baud*0.98f) <= actual_baud) && (actual_baud <= baud*1.02f)) {
+        return true;
     }
 
     return false;
 }
 
-bool UART0_Write(const uint8_t *data, uint8_t length) {
+void UART0_Write(const uint8_t *data, unsigned int length) {
+    uart_write_blocking(uart0, data, length);
+}
 
+void UART0_Read(uint8_t* data) {
+        
 }
