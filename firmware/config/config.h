@@ -1,6 +1,6 @@
 /**
  * @file    config.h
- * @brief   Libaries,
+ * @brief   Libraries,
  *          Bus speeds,
  *          Helpers.
  * @author  esicoe
@@ -32,18 +32,21 @@
 
 // CLOCKS           
 #define I2C0_CLOCK  1000000UL   // 1 MHz
-#define I2C1_CLOCK  400000UL    // 400 KHz
-#define SPI0_CLOCK  20000000UL  // 20 MHz
-#define SPI1_CLOCK  400000UL    // 400 KHz
+#define I2C1_CLOCK  400000UL    // 400 kHz
+#define SPI0_CLOCK  15000000UL  // 15 MHz
+#define SPI1_CLOCK  400000UL    // 400 kHz
 #define UART0_BAUD  9600UL      // 9.6 KBd
-#define UART1_BAUD  115200UL    // 115.2 Bd
+#define UART1_BAUD  115200UL    // 115.2 KBd
 
 // HELPERS
-#define PYRO_OFF    false
-#define PYRO_ON     true
-#define LED_OFF     false
-#define LED_ON      true
+#define PYRO_OFF        false
+#define PYRO_ON         true
+#define LED_OFF         false
+#define LED_ON          true
+#define PIN_LOW         false
+#define PIN_HIGH        true     
 
+// 8-BIT REGISTER PROGRAMMING STRUCT
 typedef struct {
     uint8_t reg;
     uint8_t value;

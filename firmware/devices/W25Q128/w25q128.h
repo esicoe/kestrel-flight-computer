@@ -1,11 +1,11 @@
 /**
- * @file    w25q128_defs.h
- * @brief   W25Q128JV SPI flash: instruction opcodes.
+ * @file    w25q128.h
+ * @brief   W25Q128JV header.
  * @author  esicoe
  */
 
-#ifndef W25Q128_DEFS_H
-#define W25Q128_DEFS_H
+#ifndef W25Q128_H
+#define W25Q128_H
 
 #define OPCODE_FLASH_WRITE_ENABLE                   0x06U
 #define OPCODE_FLASH_VOLATILE_SR_WRITE_ENABLE       0x50U
@@ -42,4 +42,4 @@
 #define OPCODE_FLASH_ENABLE_RESET                   0x66U
 #define OPCODE_FLASH_RESET_DEVICE                   0x99U
 
-#endif // W25Q128_DEFS_H
+#endif // W25Q128_H

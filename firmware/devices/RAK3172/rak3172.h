@@ -1,11 +1,17 @@
 /**
- * @file    rak3172_defs.h
- * @brief   RAK3172 LoRa module: AT commands and events.
+ * @file    rak3172.h
+ * @brief   RAK3172 header.
  * @author  esicoe
  */
 
-#ifndef RAK3172_DEFS_H
-#define RAK3172_DEFS_H
+#ifndef RAK3172_H
+#define RAK3172_H
+
+#include "config.h"
+#include "pins.h"
+
+#include "i2c1.h"
+#include "led.h"
 
 #define OPCODE_LORA_AT                              "AT"
 #define OPCODE_LORA_FIRMWARE_VERSION                "AT+VER=?"
@@ -18,4 +24,4 @@
 #define OPCODE_LORA_EVENT_TX_DONE                   "+EVT:TXP2P DONE"
 #define OPCODE_LORA_EVENT_RX                        "+EVT:RXP2P"
 
-#endif // RAK3172_DEFS_H
+#endif // RAK3172_H

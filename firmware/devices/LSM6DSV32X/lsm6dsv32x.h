@@ -181,12 +181,12 @@ typedef struct {
 
 /**
  * @brief   Checks chip ID and status, writes configuration table to the chip's registers.
- * @note    Initialization failiure displays IMU_FAIL on LEDs and blocks CPU.
+ * @note    Initialization failure displays IMU_FAIL on LEDs and blocks CPU.
  */
 void LSM6DSV32X_Initialize(void);
 
 /**
- * @brief   Reads pressure and temperature data.
+ * @brief   Reads accelerometer and gyroscope data.
  * @return  Time (us),
  *          Angular velocity x,
  *          Angular velocity y,
@@ -194,7 +194,7 @@ void LSM6DSV32X_Initialize(void);
  *          Acceleration x,
  *          Acceleration y,
  *          Acceleration z,
- *          Failiure flag,
+ *          Failure flag,
  *          CRC-8.
  */
 lsm6dsv32x_output_t LSM6DSV32X_Read(void);

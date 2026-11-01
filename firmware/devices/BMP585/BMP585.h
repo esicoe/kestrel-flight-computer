@@ -143,7 +143,7 @@ typedef struct {
 
 /**
  * @brief   Checks chip ID and status, writes configuration table to the chip's registers.
- * @note    Initialization failiure displays BAROMETER_FAIL on LEDs and blocks CPU.
+ * @note    Initialization failure displays BAROMETER_FAIL on LEDs and blocks CPU.
  */
 void BMP585_Initialize(void);
 
@@ -152,7 +152,7 @@ void BMP585_Initialize(void);
  * @return  Time (us),
  *          Pressure (Pa),
  *          Temperature (K),
- *          Failiure flag,
+ *          Failure flag,
  *          CRC-8.
  */
 bmp585_output_t BMP585_Read(void);
