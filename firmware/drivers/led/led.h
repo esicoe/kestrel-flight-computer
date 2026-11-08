@@ -16,7 +16,6 @@ typedef enum {
     FLASH_FAIL      = 0b00000100,
     MicroSD_FAIL    = 0b00000011,
     LORA_FAIL       = 0b00000110,
-    GNSS_FAIL       = 0b00000101,
     BUS_FAIL        = 0b00000111,
     PASS_1          = 0b00001000,
     PASS_2          = 0b00010000,
@@ -36,12 +35,12 @@ void LED_Initialize(void);
  * @param   status      led_code_t.
  * @note    Never returns.
  */
-void LED_DisplayError(uint8_t status);
+void LED_DisplayError(const led_code_t status);
 
 /**
  * @brief   Status code, blinking LEDs.
  * @param   status      led_code_t.
  */
-void LED_DisplayStatus(uint8_t status);
+void LED_DisplayStatus(const uint8_t status);
 
 #endif // LED_H

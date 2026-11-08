@@ -17,8 +17,33 @@ bool SPI0_Initialize(void) {
         return false;
     }
 
-    spi_set_format(spi0, 8, SPI_CPOL_0, SPI_CPHA_0, SPI_MSB_FIRST);
+    spi_set_format(spi0, SPI0_DATA_BITS, SPI_CPOL_0, SPI_CPHA_0, SPI_MSB_FIRST);
 
     return true;
 }
 
+static void SPI0_Deselect(void) {
+    gpio_put(PIN_SPI0_CS, PIN_HIGH);
+}
+
+static void SPI0_Select(void) {
+    gpio_put(PIN_SPI0_CS, PIN_LOW);
+}
+
+void SPI0_Write(const uint8_t *data, const uint16_t length) {
+    SPI0_Select();
+
+    spi_write_blocking(spi0, data, length);
+
+    SPI0_Deselect();
+}
+
+void SPI0_WriteRead(const uint8_t *writeData, const uint16_t writeLength, uint8_t *readData, const uint16_t readLength) {
+    SPI0_Select();
+
+    spi_write_blocking(spi0, writeData, writeLength);
+
+    spi_read_blocking(spi0, SPI_DUMMY_BYTE, readData, readLength);
+
+    SPI0_Deselect();
+}

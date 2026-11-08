@@ -88,7 +88,7 @@ target_link_libraries(firmware
         pico_multicore       # core 1, FIFO, doorbells, lockout
         hardware_i2c         # IMU (I2C0), barometer (I2C1)
         hardware_spi         # W25Q128 (SPI0), microSD (SPI1)
-        hardware_uart        # GNSS (UART0), LoRa (UART1)
+        hardware_uart        # LoRa (UART1)
         hardware_dma         # flash/SD writes without the CPU
         hardware_pwm         # servos
         hardware_watchdog    # one watchdog for both cores

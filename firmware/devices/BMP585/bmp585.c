@@ -1,6 +1,6 @@
 #include "bmp585.h"
 
-static register_setting_t bmp585Config[] = {
+static const register_setting_t bmp585Config[] = {
     {ADDRESS_BARO_DSP_CONFIG, VALUE_BARO_DSP_RESERVED | VALUE_BARO_DSP_SHDW_IIR_P                  },
     {ADDRESS_BARO_DSP_IIR,    VALUE_BARO_IIR_P_3      | VALUE_BARO_IIR_T_0                         },
     {ADDRESS_BARO_OSR_CONFIG, VALUE_BARO_PRESS_ON     | VALUE_BARO_OSR_P_8 | VALUE_BARO_OSR_T_1    },
@@ -8,6 +8,12 @@ static register_setting_t bmp585Config[] = {
 };
 
 void BMP585_Initialize(void) {
+    if (!BMP585_Configure()) {
+        LED_DisplayError(BAROMETER_FAIL);
+    }
+}
+
+bool BMP585_Configure(void) {
     bool status = true;
     uint8_t output;
     uint8_t input;
@@ -33,9 +39,7 @@ void BMP585_Initialize(void) {
     status &= I2C1_Read(ADDRESS_BARO_I2C, ADDRESS_BARO_OSR_EFF, &output, 1);
     status &= (output == (VALUE_BARO_ODR_IS_VALID | (bmp585Config[2].value & 0x3F)));
 
-    if (!status) {
-        LED_DisplayError(BAROMETER_FAIL); 
-    }
+    return status;
 }
 
 bmp585_output_t BMP585_Read(void) {

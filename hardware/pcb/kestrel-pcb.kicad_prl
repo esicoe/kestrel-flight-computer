@@ -63,7 +63,7 @@
     "ssh_key": ""
   },
   "meta": {
-    "filename": "mini-one-pcb.kicad_prl",
+    "filename": "kestrel-pcb.kicad_prl",
     "version": 5
   },
   "net_inspector_panel": {
@@ -96,18 +96,18 @@
       11
     ],
     "col_widths": [
-      278,
-      259,
-      170,
-      115,
-      170,
-      170,
-      170,
-      123,
-      170,
-      170,
-      170,
-      170
+      232,
+      216,
+      142,
+      96,
+      142,
+      142,
+      142,
+      103,
+      142,
+      142,
+      142,
+      142
     ],
     "custom_group_rules": [],
     "expanded_rows": [],

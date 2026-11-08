@@ -148,6 +148,13 @@ typedef struct {
 void BMP585_Initialize(void);
 
 /**
+ * @brief   Same as BMP585_Initialize(), returns the result instead of blocking.
+ * @return  TRUE on success,
+ *          FALSE on failure.
+ */
+bool BMP585_Configure(void);
+
+/**
  * @brief   Reads pressure and temperature data.
  * @return  Time (us),
  *          Pressure (Pa),

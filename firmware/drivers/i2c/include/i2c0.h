@@ -27,7 +27,7 @@ bool I2C0_Initialize(void);
  * @return  TRUE on success,
  *          FALSE on failure.
  */
-bool I2C0_Write(uint8_t address, uint8_t reg, uint8_t data);
+bool I2C0_Write(const uint8_t address, const uint8_t reg, const uint8_t data);
 
 /**
  * @brief   Reads multiple registers in sequence.
@@ -38,6 +38,6 @@ bool I2C0_Write(uint8_t address, uint8_t reg, uint8_t data);
  * @return  TRUE on success,
  *          FALSE on failure.
  */
-bool I2C0_Read(uint8_t address, uint8_t reg, uint8_t *data, int length);
+bool I2C0_Read(const uint8_t address, const uint8_t reg, uint8_t *data, const int length);
 
 #endif // I2C0_H

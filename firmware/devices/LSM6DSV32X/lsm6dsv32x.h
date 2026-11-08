@@ -186,6 +186,13 @@ typedef struct {
 void LSM6DSV32X_Initialize(void);
 
 /**
+ * @brief   Same as LSM6DSV32X_Initialize(), returns the result instead of blocking.
+ * @return  TRUE on success,
+ *          FALSE on failure.
+ */
+bool LSM6DSV32X_Configure(void);
+
+/**
  * @brief   Reads accelerometer and gyroscope data.
  * @return  Time (us),
  *          Angular velocity x,

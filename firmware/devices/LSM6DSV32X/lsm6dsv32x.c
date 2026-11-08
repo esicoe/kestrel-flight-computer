@@ -1,6 +1,6 @@
 #include "lsm6dsv32x.h"
 
-static register_setting_t lsm6dsv32xConfig[] = {
+static const register_setting_t lsm6dsv32xConfig[] = {
     {ADDRESS_IMU_CTRL3,     VALUE_IMU_BDU         | VALUE_IMU_IF_INC                                },
     {ADDRESS_IMU_CTRL4,     VALUE_IMU_DRDY_MASK                                                     }, 
     {ADDRESS_IMU_CTRL8,     VALUE_IMU_FS_XL_16    | VALUE_IMU_CTRL8_RESERVED | VALUE_IMU_LPF2_XL_20 }, 
@@ -13,6 +13,12 @@ static register_setting_t lsm6dsv32xConfig[] = {
 };
 
 void LSM6DSV32X_Initialize(void) {
+    if (!LSM6DSV32X_Configure()) {
+        LED_DisplayError(IMU_FAIL);
+    }
+}
+
+bool LSM6DSV32X_Configure(void) {
     bool status = true;
     uint8_t output;
     uint8_t input;
@@ -38,9 +44,7 @@ void LSM6DSV32X_Initialize(void) {
         status &= (output == lsm6dsv32xConfig[i].value);
     }
 
-    if (!status) {
-        LED_DisplayError(IMU_FAIL);
-    }
+    return status;
 }
 
 lsm6dsv32x_output_t LSM6DSV32X_Read(void) {
